@@ -15,6 +15,25 @@ const app = next({
 });
 const handle = app.getRequestHandler();
 
+function storeCallback(session){
+  console.log('storeCallback',session);
+  return true
+}
+function loadCallback(id){
+console.log('loadCallback ',id);
+
+}
+
+function deleteCallback(id){
+  console.log('deleteCallback',id);
+}
+
+const sessionStorage = new Shopify.Session.CustomSessionStorage(
+  storeCallback,
+  loadCallback,
+  deleteCallback
+)
+
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
   API_SECRET_KEY: process.env.SHOPIFY_API_SECRET,
