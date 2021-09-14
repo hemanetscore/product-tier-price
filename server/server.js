@@ -18,29 +18,29 @@ const app = next({
 });
 const handle = app.getRequestHandler();
 
-function storeCallback(){
-  console.log('storeCallback',);
-  // fs.writeFileSync('./session.json',JSON.stringify(session));
-  return true
-}
-function loadCallback(id){
-console.log('loadCallback ',id);
-// const sessionResult = fs.readFileSync('./session.json','utf8');
-// return  Object.assign(
-//   new Session,
-//   JSON.parse(sessionResult)
+// function storeCallback(){
+//   console.log('storeCallback',);
+//   // fs.writeFileSync('./session.json',JSON.stringify(session));
+//   return true
+// }
+// function loadCallback(id){
+// console.log('loadCallback ',id);
+// // const sessionResult = fs.readFileSync('./session.json','utf8');
+// // return  Object.assign(
+// //   new Session,
+// //   JSON.parse(sessionResult)
+// // )
+// }
+
+// function deleteCallback(id){
+//   console.log('deleteCallback',id);
+// }
+
+// const sessionStorage = new Shopify.Session.CustomSessionStorage(
+//   // storeCallback,
+//   // loadCallback,
+//   // deleteCallback
 // )
-}
-
-function deleteCallback(id){
-  console.log('deleteCallback',id);
-}
-
-const sessionStorage = new Shopify.Session.CustomSessionStorage(
-  storeCallback,
-  loadCallback,
-  deleteCallback
-)
 
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
@@ -50,8 +50,8 @@ Shopify.Context.initialize({
   API_VERSION: ApiVersion.October20,
   IS_EMBEDDED_APP: true,
   // This should be replaced with your preferred storage strategy
-  // SESSION_STORAGE: new Shopify.Session.MemorySessionStorage(),
-  SESSION_STORAGE: sessionStorage,
+  SESSION_STORAGE: new Shopify.Session.MemorySessionStorage(),
+  // SESSION_STORAGE: sessionStorage,
 
 });
 
